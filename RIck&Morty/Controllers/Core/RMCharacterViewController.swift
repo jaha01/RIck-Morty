@@ -15,7 +15,7 @@ final class RMCharacterViewController: UIViewController {
 
         view.backgroundColor = .systemBackground
         title = "Characters"
-        
+/*
         let request = RMRequest(
             endpoint: .character,
            // pathComponent: ["1"]
@@ -25,14 +25,19 @@ final class RMCharacterViewController: UIViewController {
             ]
         )
         print(request.url)
-        
-//        RMService.shared.execute(request,
-//                                 expecting: RMCharacter.self/*String.self*/) { result in
-//            switch result {
-//            case .success(<#T##Success#>)
-//
-//            }
-//        }
+ */
+        // MARK: -- ОШИБКА ГДЕ-ТО Здесь --
+        RMService.shared.execute(.listCharactersRequests, expecting: RMGetAllCharactersResponse.self) { result in
+            
+            switch result {
+            case .success(let model):
+                print("Total: " + String(describing: model.info.count))
+                print("Page result count: " + String(describing: model.result.count))
+            case .failure(let error):
+                print(String(describing: error))
+            }
+        }
+
     }
     
 }
