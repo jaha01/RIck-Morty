@@ -36,6 +36,7 @@
 		4475BA5F2A0AF8BB00E57233 /* RMCharacterDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4475BA5E2A0AF8BB00E57233 /* RMCharacterDetailView.swift */; };
 		4475BA612A0AF8F300E57233 /* RMCharacterDetailViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4475BA602A0AF8F300E57233 /* RMCharacterDetailViewViewModel.swift */; };
 		4475BA632A0C1FC200E57233 /* RMFooterLoadingCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4475BA622A0C1FC200E57233 /* RMFooterLoadingCollectionReusableView.swift */; };
+		4475BA652A0D6AE700E57233 /* RMImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4475BA642A0D6AE700E57233 /* RMImageLoader.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -70,6 +71,7 @@
 		4475BA5E2A0AF8BB00E57233 /* RMCharacterDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RMCharacterDetailView.swift; sourceTree = "<group>"; };
 		4475BA602A0AF8F300E57233 /* RMCharacterDetailViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RMCharacterDetailViewViewModel.swift; sourceTree = "<group>"; };
 		4475BA622A0C1FC200E57233 /* RMFooterLoadingCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RMFooterLoadingCollectionReusableView.swift; sourceTree = "<group>"; };
+		4475BA642A0D6AE700E57233 /* RMImageLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RMImageLoader.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -156,6 +158,7 @@
 		4475B9C129E5E84E00E57233 /* Managers */ = {
 			isa = PBXGroup;
 			children = (
+				4475BA642A0D6AE700E57233 /* RMImageLoader.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -308,6 +311,7 @@
 				4475B9AD29E5DE2C00E57233 /* RMTabViewController.swift in Sources */,
 				4475BA582A0A844400E57233 /* RMCharacterCollectionViewCell.swift in Sources */,
 				4475B9D029E5EA0700E57233 /* RMEpisodeViewController.swift in Sources */,
+				4475BA652A0D6AE700E57233 /* RMImageLoader.swift in Sources */,
 				4475B9A929E5DE2C00E57233 /* AppDelegate.swift in Sources */,
 				4475B9AB29E5DE2C00E57233 /* SceneDelegate.swift in Sources */,
 				4475B9D229E5EA1200E57233 /* RMSettingsViewController.swift in Sources */,
