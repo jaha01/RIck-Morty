@@ -1,23 +1,24 @@
 //
-//  CharacterListView.swift
+//  RMEpisodeListView.swift
 //  RIck&Morty
 //
-//  Created by Jahongir Anvarov on 08.05.2023.
+//  Created by Jahongir Anvarov on 22.05.2023.
 //
 
 import UIKit
 
-protocol RMCharacterListViewDelegate: AnyObject {
-    func rmCharacterListView(
-        _ characterListView: RMCharacterListView,
-        didSelectCharacter character: RMCharacter
+
+protocol RMEpisodeListViewDelegate: AnyObject {
+    func rmEpisodeListView(
+        _ characterListView: RMEpisodeListView,
+        didSelectEpisode episode: RMCharacter
     )
 }
 
-/// View that handles showing list of charcters, loader, etc
-final class RMCharacterListView: UIView {
+/// View that handles showing list of episodes, loader, etc
+final class RMEpisodeListView: UIView {
     
-    public weak var delegate: RMCharacterListViewDelegate?
+    public weak var delegate: RMEpisodeListViewDelegate?
     
     private let viewModel = RMCharacterListViewViewModel()
     
@@ -37,7 +38,7 @@ final class RMCharacterListView: UIView {
         collectionView.alpha = 0
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.register(RMCharacterCollectionViewCell.self, forCellWithReuseIdentifier: RMCharacterCollectionViewCell.cellIdentifier)
-        collectionView.register(RMFooterLoadingCollectionReusableView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: RMFooterLoadingCollectionReusableView.identifier) // добавили футер для загрузки 
+        collectionView.register(RMFooterLoadingCollectionReusableView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: RMFooterLoadingCollectionReusableView.identifier) // добавили футер для загрузки
         return collectionView
     }()
     
@@ -89,7 +90,7 @@ final class RMCharacterListView: UIView {
     }
 }
 
-extension RMCharacterListView: RMCharacterListViewViewModelDelegate {
+extension RMEpisodeListView: RMCharacterListViewViewModelDelegate {
     
     func didSelectCharacter(_ character: RMCharacter) {
         delegate?.rmCharacterListView(self, didSelectCharacter: character)
