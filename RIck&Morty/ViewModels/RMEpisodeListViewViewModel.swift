@@ -5,7 +5,7 @@
 //  Created by Jahongir Anvarov on 22.05.2023.
 //
 
-import Foundation
+import UIKit
 
 protocol RMEpisodeListViewViewModelDelegate: AnyObject {
     func didLoadInitialEpisodes()
@@ -21,14 +21,12 @@ final class RMEpisodeListViewViewModel: NSObject {
     
     private var isLoadingMoreCharacter = false
     
-    private var apiInfo: RMGetAllCharactersResponse.Info? = nil
+    private var apiInfo: RMGetAllEpisodesResponse.Info? = nil
     
     private var episodes: [RMEpisode] = [] {
         didSet {
-            for episode in episodes /*where !cellViewModels.contains(where: { $0.characterName == character.name})*/ {
-//                let viewModel = RMEpisodeCollectionViewCellViewModel(characterName: character.name,
-//                                                                       characterStatus: character.status,
-//                                                                       characterImageUrl: URL(string: character.image))
+            for episode in episodes {
+                let viewModel = RMCharacterEpisodeCollectionViewCellViewModel(epsiodeDataUrl: URL(string: episode.url))
                 if !cellViewModels.contains(viewModel) {
                     cellViewModels.append(viewModel)
                 }
@@ -38,17 +36,17 @@ final class RMEpisodeListViewViewModel: NSObject {
     
     private var cellViewModels: [RMCharacterEpisodeCollectionViewCellViewModel] = []
     
-    /// fetch initial set of character
-    public func fetchCharacters() {
-        RMService.shared.execute(.listCharactersRequests, expecting: RMGetAllCharactersResponse.self) { [weak self] result in
+    /// fetch initial set of episodes
+    public func fetchEpisodes() {
+        RMService.shared.execute(.listEpisodesRequests, expecting: RMGetAllEpisodesResponse.self) { [weak self] result in
             switch result {
             case .success(let responseModel):
                 let results = responseModel.results
                 let info = responseModel.info
-                self?.characters = results
+                self?.episodes = results
                 self?.apiInfo = info
                 DispatchQueue.main.async {
-                    self?.delegate?.didLoadInitialCharacters()
+                    self?.delegate?.didLoadInitialEpisodes()
                 }
 //                print("Example image url: " + String(describing: model.results.first?.image ?? "No image"))
 //                print("Page result count: " + String(describing: model.results.count))
@@ -58,8 +56,8 @@ final class RMEpisodeListViewViewModel: NSObject {
         }
     }
     
-    /// Paginate if additional character are needed
-    public func fetchAdditionalCharacters(url: URL) {
+    /// Paginate if additional episode are needed
+    public func fetchAdditionalEpisodes(url: URL) {
         guard !isLoadingMoreCharacter else {
             return
         }
@@ -70,7 +68,7 @@ final class RMEpisodeListViewViewModel: NSObject {
             return
         }
             
-        RMService.shared.execute(request, expecting: RMGetAllCharactersResponse.self) { [weak self] result in
+        RMService.shared.execute(request, expecting: RMGetAllEpisodesResponse.self) { [weak self] result in
             guard let strongSelf = self else {
                 return
             }
@@ -79,16 +77,16 @@ final class RMEpisodeListViewViewModel: NSObject {
                 let moreResults = responseModel.results
                 let info = responseModel.info
                 strongSelf.apiInfo = info
-                let originalCount = strongSelf.characters.count
+                let originalCount = strongSelf.episodes.count
                 let newCount = moreResults.count
                 let total = originalCount + newCount
                 let startIndex = total - newCount
                 let indexPathToAdd: [IndexPath] = Array(startIndex ..< (startIndex+newCount)).compactMap ({
                     return IndexPath(row: $0, section: 0)
                 })
-                strongSelf.characters.append(contentsOf: moreResults)
+                strongSelf.episodes.append(contentsOf: moreResults)
                 DispatchQueue.main.async {
-                    strongSelf.delegate?.didLoadMoreCharacters(with: indexPathToAdd)
+                    strongSelf.delegate?.didLoadMoreEpisodes(with: indexPathToAdd)
                     strongSelf.isLoadingMoreCharacter = false
                 }
             case .failure(let failure):
@@ -111,7 +109,7 @@ extension RMEpisodeListViewViewModel: UICollectionViewDataSource, UICollectionVi
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RMEpisodeCollectionViewCell.cellIdentifier, for: indexPath) as? RMEpisodeCollectionViewCell else {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RMCharacterEpisodeCollectionViewCell.cellIdentifier, for: indexPath) as? RMCharacterEpisodeCollectionViewCell else {
                 fatalError("Unsuported cell")
             }
         //cell.backgroundColor = .systemGreen
@@ -143,13 +141,13 @@ extension RMEpisodeListViewViewModel: UICollectionViewDataSource, UICollectionVi
         let width = (bounds.width-30)/2
         return CGSize(
             width: width,
-            height: width * 1.5)
+            height: width * 0.8)
     }
  
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         collectionView.deselectItem(at: indexPath, animated: true)
-        let character = characters[indexPath.row]
-        delegate?.didSelectCharacter(character)
+        let selection = episodes[indexPath.row]
+        delegate?.didSelectEpisode(selection)
     }
 }
 
@@ -170,7 +168,7 @@ extension RMEpisodeListViewViewModel: UIScrollViewDelegate {
             let totalScrollViewFixedHeight = scrollView.frame.size.height
             
             if offset >= totalContentHeight - totalScrollViewFixedHeight - 120 {
-                self?.fetchAdditionalCharacters(url: url)
+                self?.fetchAdditionalEpisodes(url: url)
             }
             t.invalidate()
         }

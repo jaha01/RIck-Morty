@@ -49,6 +49,7 @@
 		449BD8CB2A1C06230078249D /* RMEpisodeDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 449BD8CA2A1C06230078249D /* RMEpisodeDetailView.swift */; };
 		449BD8CE2A1C095B0078249D /* RMEpisodeListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 449BD8CD2A1C095B0078249D /* RMEpisodeListView.swift */; };
 		449BD8D02A1C0CDD0078249D /* RMEpisodeListViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 449BD8CF2A1C0CDD0078249D /* RMEpisodeListViewViewModel.swift */; };
+		449BD8D22A1D54810078249D /* RMGetAllEpisodesResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 449BD8D12A1D54810078249D /* RMGetAllEpisodesResponse.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -96,6 +97,7 @@
 		449BD8CA2A1C06230078249D /* RMEpisodeDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RMEpisodeDetailView.swift; sourceTree = "<group>"; };
 		449BD8CD2A1C095B0078249D /* RMEpisodeListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RMEpisodeListView.swift; sourceTree = "<group>"; };
 		449BD8CF2A1C0CDD0078249D /* RMEpisodeListViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RMEpisodeListViewViewModel.swift; sourceTree = "<group>"; };
+		449BD8D12A1D54810078249D /* RMGetAllEpisodesResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RMGetAllEpisodesResponse.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -243,6 +245,7 @@
 			isa = PBXGroup;
 			children = (
 				4475BA0729F7004300E57233 /* RMGetAllCharactersResponse.swift */,
+				449BD8D12A1D54810078249D /* RMGetAllEpisodesResponse.swift */,
 			);
 			path = APIResponseType;
 			sourceTree = "<group>";
@@ -382,6 +385,7 @@
 				4475BA582A0A844400E57233 /* RMCharacterCollectionViewCell.swift in Sources */,
 				4475BA722A11253A00E57233 /* RMCharacterInfoCollectionViewCellViewModel.swift in Sources */,
 				4475B9D029E5EA0700E57233 /* RMEpisodeViewController.swift in Sources */,
+				449BD8D22A1D54810078249D /* RMGetAllEpisodesResponse.swift in Sources */,
 				4475BA652A0D6AE700E57233 /* RMImageLoader.swift in Sources */,
 				4475B9A929E5DE2C00E57233 /* AppDelegate.swift in Sources */,
 				4475B9AB29E5DE2C00E57233 /* SceneDelegate.swift in Sources */,
