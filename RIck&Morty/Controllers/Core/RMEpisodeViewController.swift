@@ -29,7 +29,15 @@ final class RMEpisodeViewController: UIViewController, RMEpisodeListViewDelegate
         print(request.url)
  */
         setupView()
-
+        addSearchButton()
+    }
+    
+    private func addSearchButton() {
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(didTapShare))
+    }
+    
+    @objc private func didTapShare() {
+        
     }
     
     private func setupView() {
